@@ -1,0 +1,11 @@
+(library
+ (name tutorial_lib)
+ (public_name tutorial_lib)
+ (libraries base camlzip owl owl-parameters adam dilqr ilqr_vae_no_mpi gp juplot comm_no_mpi accessor)
+ (preprocess
+  (pps ppx_accessor)))
+
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))

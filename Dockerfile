@@ -19,8 +19,15 @@ RUN sudo apt-get -y install wget unzip pkg-config gfortran \
     libplplot-dev libopenblas-dev liblapacke-dev gnuplot \
     libgmp-dev libzmq3-dev
 
-RUN opam install -y dune base owl jupyter fpath merlin \
-    ocamlformat ppx_inline_test ppx_accessor accessor accessor_base 
+RUN opam install -y dune 
+
+RUN opam install -y base owl jupyter 
+
+RUN opam install -y fpath merlin
+
+RUN opam install -y ocamlformat ppx_inline_test ppx_accessor 
+
+RUN opam install -y accessor accessor_base 
 
 RUN eval $(opam env)  
 ENV PATH=$HOME/.opam/4.12/bin:$PATH

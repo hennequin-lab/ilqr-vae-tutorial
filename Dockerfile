@@ -75,4 +75,7 @@ RUN sudo chown -R opam .
 RUN sudo chgrp -R opam .
 RUN rm -f .git/config && mv config_docker .git/config
 
+RUN opam install -y bos
+RUN echo "#use \"topfind\";;" > $HOME/.ocamlinit
+
 CMD ["bash"]

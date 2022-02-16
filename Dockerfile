@@ -17,7 +17,7 @@ RUN sudo apt-get -y update && \
     sudo apt-get -y install wget unzip pkg-config gfortran \
         libplplot-dev libopenblas-dev liblapacke-dev gnuplot \
         libgmp-dev libzmq3-dev && \
-    opam install -y dune base owl jupyter fpath merlin \
+    opam install -y dune base owl jupyter fpath bos merlin \
         ocamlformat ppx_inline_test ppx_accessor accessor accessor_base && \
     eval $(opam env)
 
@@ -74,5 +74,7 @@ ENTRYPOINT ["/usr/bin/tini", "--"]
 RUN sudo chown -R opam .
 RUN sudo chgrp -R opam .
 RUN rm -f .git/config && mv config_docker .git/config
+
+RUN echo "#use \"topfind\";;" > $HOME/.ocamlinit
 
 CMD ["bash"]

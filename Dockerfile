@@ -8,27 +8,24 @@ RUN sudo rm -rf _build
 
 # Python stuff
  
-RUN sudo apt-get -y update
-RUN sudo apt-get install -y build-essential python3.6 python3-pip python3-dev
-RUN sudo pip3 -q install pip --upgrade
-RUN sudo pip3 install jupyter
- 
-# OCaml stuff
+RUN sudo apt-get -y update && \
+    sudo apt-get install -y build-essential python3.6 python3-pip python3-dev && \
+    sudo pip3 -q install pip --upgrade && \
+    sudo pip3 install jupyter && sudo pip3 install jupyter-contrib-nbextensions && \
+    jupyter contrib nbextension install --user && \
+    jupyter nbextension enable code_prettify/code_prettify && \
+    sudo apt-get -y install wget unzip pkg-config gfortran \
+        libplplot-dev libopenblas-dev liblapacke-dev gnuplot \
+        libgmp-dev libzmq3-dev && \
+    opam install -y dune base owl jupyter fpath merlin \
+        ocamlformat ppx_inline_test ppx_accessor accessor accessor_base && \
+    eval $(opam env)
 
-RUN sudo apt-get -y install wget unzip pkg-config gfortran \
-    libplplot-dev libopenblas-dev liblapacke-dev gnuplot \
-    libgmp-dev libzmq3-dev
-
-RUN opam install -y dune base owl jupyter fpath merlin \
-    ocamlformat ppx_inline_test ppx_accessor accessor accessor_base 
-
-RUN eval $(opam env)  
 ENV PATH=$HOME/.opam/4.12/bin:$PATH
 
-RUN ocaml-jupyter-opam-genspec 
-RUN sudo jupyter kernelspec install --name ocaml-jupyter $HOME/.opam/4.12/share/jupyter
-
-RUN git clone https://github.com/tachukao/dilqr.git $HOME/dilqr && \
+RUN ocaml-jupyter-opam-genspec && \
+    sudo jupyter kernelspec install --name ocaml-jupyter $HOME/.opam/4.12/share/jupyter && \
+    git clone https://github.com/tachukao/dilqr.git $HOME/dilqr && \
     git clone https://github.com/tachukao/owl_bmo.git $HOME/owl_bmo && \
     git clone https://github.com/hennequin-lab/comm.git $HOME/comm && \
     git clone https://github.com/hennequin-lab/owl_parameters.git $HOME/owl_parameters && \

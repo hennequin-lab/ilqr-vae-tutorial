@@ -3,6 +3,8 @@ open Ilqr_vae
 open Base
 open Gp
 
+  
+  
 (* animation example *)
 let plot_us_init all_us i (module P : Plot) =
   let it_title = Printf.sprintf "Iteration %i" i in
@@ -29,3 +31,8 @@ let plot_us_fin all_us i (module P : Plot) =
     @ [ xlabel "time /ms"; ylabel ""; title it_title; yrange (-0.1, 0.1) ]
     @ [ set "object rect from 0,-0.1 to 3,0.1 fc lt 2 fs transparent solid 0.5 front" ])
 
+
+let print_msg ?ph s =
+  Jupyter_notebook.printf "%s%!" s;
+  Jupyter_notebook.display_formatter ?display_id:ph "text/html" |> ignore
+  

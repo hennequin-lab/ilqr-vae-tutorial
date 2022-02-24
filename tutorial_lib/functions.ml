@@ -14,7 +14,7 @@ let plot_us ?(range = 0.1) u i (module P : Plot) =
     (default_props
     @ [ xlabel "time [ms]"; ylabel ""; title it_title; yrange (-.range, range) ]
     @ [ set
-          "object rect from 0, graph 0 to first 3, graph 1 fc lt 2 fs transparent solid \
+          "object rect from 0, graph 0 to first 6, graph 1 fc lt 2 fs transparent solid \
            0.5 front"
       ])
 
